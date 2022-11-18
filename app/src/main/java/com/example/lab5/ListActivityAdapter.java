@@ -15,6 +15,22 @@ public class ListActivityAdapter extends RecyclerView.Adapter<ListActivityAdapte
     private Actividad[] listaActividad;
     private Context context;
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public Actividad[] getListaActividad() {
+        return listaActividad;
+    }
+
+    public void setListaActividad(Actividad[] listaActividad) {
+        this.listaActividad = listaActividad;
+    }
+
     public class ActivityViewHolder extends RecyclerView.ViewHolder{
         Actividad actividad;
 
