@@ -1,5 +1,6 @@
 package com.example.lab5;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -14,6 +15,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +29,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ActualizaAgendaActivity extends AppCompatActivity  {
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     EditText fechaFin,horaFin,fechaInicio,horaInicio,titulo,descripcion;
     Button btnAgregar;
@@ -48,7 +57,23 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
                     boolean fechaIniciovalida = fechaInicioDt.after(currentDate);
                     if(fechaFinvalida&&fechaIniciovalida){
                         Actividad actividad = new Actividad(fechaFin.getText().toString(),horaFin.getText().toString(),fechaInicio.getText().toString(),horaInicio.getText().toString(),titulo.getText().toString(),descripcion.getText().toString());
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                databaseReference.setValue(actividad);
+                                Toast.makeText(ActualizaAgendaActivity.this, "Data Añadida correctamente", Toast.LENGTH_SHORT).show();
+                                fechaFin.setText("");
+                                horaFin.setText("");
+                                descripcion.setText("");
+                                titulo.setText("");
+                                fechaInicio.setText("");
+                                horaInicio.setText("");
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
+                            }
+                        });
                     }else{
                         if(!fechaIniciovalida){
                             fechaInicio.setError("La fecha ingresada es incorrecta");
@@ -65,6 +90,4 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
             }
         });
     }
-
-
 }
