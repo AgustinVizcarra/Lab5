@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Lab5.Material"
         tools:targetApi="31">
         <activity
+            android:name=".CambioContrasenia"
+            android:exported="false" />
+        <activity
             android:name=".RegistrarUsuario"
             android:exported="false" />
         <activity
