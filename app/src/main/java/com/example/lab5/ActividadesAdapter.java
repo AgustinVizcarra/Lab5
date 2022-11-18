@@ -49,8 +49,6 @@ public class ActividadesAdapter extends FirebaseRecyclerAdapter<Actividad,Activi
             }
         });
 
-
-
     }
 
     @NonNull

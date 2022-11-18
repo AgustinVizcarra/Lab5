@@ -4,6 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InicioSesion">
+    tools:context=".InicioSesion"
+    android:id="@+id/activity_inicio_sesion">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputCorreo_iniSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Correo"
+        app:layout_constraintEnd_toEndOf="@+id/textView1"
+        app:layout_constraintStart_toStartOf="@+id/textView1"
+        app:layout_constraintTop_toBottomOf="@+id/textView1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="302dp"
+            android:layout_height="50dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputPassword_iniSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="@+id/inputCorreo_iniSesion"
+        app:layout_constraintStart_toStartOf="@+id/inputCorreo_iniSesion"
+        app:layout_constraintTop_toBottomOf="@+id/inputCorreo_iniSesion">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="302dp"
+            android:layout_height="50dp"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="184dp"
+        android:text="Iniciar Sesión"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="validarInicioSesion"
+        android:text="INGRESAR"
+        app:layout_constraintEnd_toEndOf="@+id/inputPassword_iniSesion"
+        app:layout_constraintStart_toStartOf="@+id/inputPassword_iniSesion"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword_iniSesion" />
+
+    <Button
+        android:id="@+id/btn_cambiocontrasenia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="cambiarContrasenia"
+        android:text="CAMBIO DE CONTRASEÑA"
+        app:layout_constraintEnd_toEndOf="@+id/btn_inicio"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/btn_inicio"
+        app:layout_constraintTop_toBottomOf="@+id/btn_inicio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
