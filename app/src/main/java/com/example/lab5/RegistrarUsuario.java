@@ -23,7 +23,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
 
-    boolean codigoValido = true;
+    boolean correoValido = true;
     boolean passwordValido = true;
     boolean verifyPasswordValido = true;
 
@@ -72,7 +72,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             verifyPasswordValido = false;
         }
 
-        if (codigoValido && correoValido && passwordValido && verifyPasswordValido) {
+        if (correoValido && passwordValido && verifyPasswordValido) {
             Log.d("task", "Registro valido");
 
             firebaseAuth.createUserWithEmailAndPassword(correo.getEditText().getText().toString(), password.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
