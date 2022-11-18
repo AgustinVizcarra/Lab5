@@ -74,8 +74,8 @@ public class InicioSesion extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                    //Intent intent = new Intent(InicioSesion.this, .class);
-                                    //startActivity(intent);
+                                    Intent intent = new Intent(InicioSesion.this, ListActivity.class);
+                                    startActivity(intent);
                                 } else {
                                     Snackbar.make(findViewById(R.id.activity_inicio_sesion), "Su cuenta no ha sido verificada. Verifíquela para poder ingresar", Snackbar.LENGTH_LONG).show();
                                 }
