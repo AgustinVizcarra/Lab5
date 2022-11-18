@@ -1,6 +1,8 @@
 package com.example.lab5;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -19,6 +21,9 @@ public class ListActivity extends AppCompatActivity {
         Actividad actividad[];
         ListActivityAdapter activityAdapter = new ListActivityAdapter();
         activityAdapter.setListaActividad(actividad);
-
+        activityAdapter.setContext(ListActivity.this);
+        RecyclerView recyclerView = findViewById(R.id.List);
+        recyclerView.setAdapter(activityAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
     }
 }
