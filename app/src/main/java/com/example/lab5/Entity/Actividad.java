@@ -1,12 +1,16 @@
 package com.example.lab5.Entity;
 
-public class Actividad {
+import java.io.Serializable;
+
+public class Actividad implements Serializable {
     private String fechaFin;
     private String horaFin;
     private String fechaInicio;
     private String horaInicio;
     private String titulo;
     private String descripcion;
+    private String filename;
+    private String key;
 
     public Actividad(String fechaFin, String horaFin, String fechaInicio, String horaInicio, String titulo, String descripcion) {
         this.fechaFin = fechaFin;
@@ -15,6 +19,17 @@ public class Actividad {
         this.horaInicio = horaInicio;
         this.titulo = titulo;
         this.descripcion = descripcion;
+    }
+
+    public Actividad(String fechaFin, String horaFin, String fechaInicio, String horaInicio, String titulo, String descripcion, String filename, String key) {
+        this.fechaFin = fechaFin;
+        this.horaFin = horaFin;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.filename = filename;
+        this.key = key;
     }
 
     public String getFechaFin() {
@@ -63,5 +78,21 @@ public class Actividad {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

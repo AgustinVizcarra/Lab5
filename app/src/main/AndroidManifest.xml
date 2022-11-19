@@ -21,6 +21,10 @@
             android:exported="false"
             android:parentActivityName=".InicioSesion" />
         <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:parentActivityName=".InicioSesion" />
+        <activity
             android:name=".RegistrarUsuario"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
@@ -29,7 +33,7 @@
             android:exported="false"
             android:parentActivityName=".InicioSesion" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ActualizaAgendaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
