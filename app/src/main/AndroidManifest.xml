@@ -20,6 +20,8 @@
             android:name=".CambioContrasenia"
             android:exported="false"
             android:parentActivityName=".InicioSesion" />
+        <activity android:name=".ListActivity"
+            android:exported="false"/>
         <activity
             android:name=".ActualizaAgendaActivity"
             android:exported="false"

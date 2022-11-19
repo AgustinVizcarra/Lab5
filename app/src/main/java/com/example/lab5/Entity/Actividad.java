@@ -12,6 +12,9 @@ public class Actividad implements Serializable {
     private String filename;
     private String key;
 
+    public Actividad() {
+    }
+
     public Actividad(String fechaFin, String horaFin, String fechaInicio, String horaInicio, String titulo, String descripcion) {
         this.fechaFin = fechaFin;
         this.horaFin = horaFin;
@@ -20,6 +23,8 @@ public class Actividad implements Serializable {
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
+
+
 
     public Actividad(String fechaFin, String horaFin, String fechaInicio, String horaInicio, String titulo, String descripcion, String filename, String key) {
         this.fechaFin = fechaFin;
@@ -30,6 +35,13 @@ public class Actividad implements Serializable {
         this.descripcion = descripcion;
         this.filename = filename;
         this.key = key;
+    }
+
+    public String getDetalle(){
+        return "Fecha de inicio: "+this.fechaInicio+"\n"+
+                "Hora de inicio: "+this.horaInicio+"\n"+
+                "Fecha de fin: "+this.fechaFin+"\n"+
+                "Hora de fin: "+this.horaFin+"\n";
     }
 
     public String getFechaFin() {
