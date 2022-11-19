@@ -1,39 +1,47 @@
 package com.example.lab5;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.lab5.Entity.Actividad;
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ActualizaAgendaActivity extends AppCompatActivity  {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference();
-
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
+    Uri imageUri;
     EditText fechaFin,horaFin,fechaInicio,horaInicio,titulo,descripcion;
-    Button btnAgregar;
+    Button btnAgregar,subirImagen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +52,12 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
         horaInicio = (EditText) findViewById(R.id.horaInicio);
         titulo = (EditText) findViewById(R.id.tituloActividad);
         descripcion = (EditText) findViewById(R.id.descripcionActividad);
+        subirImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageUri=selectImage();
+            }
+        });
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -55,12 +69,21 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
                     Date fechaInicioDt = new SimpleDateFormat("yyy-MM-dd").parse(fechaInicio.getText().toString());
                     boolean fechaFinvalida = fechaFinDt.after(currentDate)&&fechaFinDt.after(fechaInicioDt);
                     boolean fechaIniciovalida = fechaInicioDt.after(currentDate);
-                    if(fechaFinvalida&&fechaIniciovalida){
+                    if(fechaFinvalida&&fechaIniciovalida&&imageUri!=null){
                         Actividad actividad = new Actividad(fechaFin.getText().toString(),horaFin.getText().toString(),fechaInicio.getText().toString(),horaInicio.getText().toString(),titulo.getText().toString(),descripcion.getText().toString());
                         databaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                //Guardo el valor en la base de datos
                                 databaseReference.setValue(actividad);
+                                String[] path= imageUri.toString().split("/");
+                                String filename = path[path.length-1];
+                                System.out.println("El filename seleccionado es: "+filename);
+                                StorageReference imageReference = storageReference.child("img/"+filename);
+                                //
+                                imageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot ->
+                                    Log.d("msg","Archivo Subido correctamente")).addOnFailureListener(e->Log.d("msg","Error",e.getCause()));
+                                //
                                 Toast.makeText(ActualizaAgendaActivity.this, "Data Añadida correctamente", Toast.LENGTH_SHORT).show();
                                 fechaFin.setText("");
                                 horaFin.setText("");
@@ -77,11 +100,14 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
                     }else{
                         if(!fechaIniciovalida){
                             fechaInicio.setError("La fecha ingresada es incorrecta");
-                            fechaInicio.setTextColor(R.color.red);
+                            fechaInicio.setTextColor(Color.RED);
                         }
                         if(!fechaFinvalida){
                             fechaFin.setError("La fecha ingresada es incorrecta");
-                            fechaFin.setTextColor(R.color.red);
+                            fechaFin.setTextColor(Color.RED);
+                        }
+                        if(imageUri==null){
+                            Toast.makeText(ActualizaAgendaActivity.this, "No se ha seleccionado una foto!!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (ParseException e) {
@@ -89,5 +115,18 @@ public class ActualizaAgendaActivity extends AppCompatActivity  {
                 }
             }
         });
+    }
+    //Se crea el metodo para la subida de archivo
+    private Uri selectImage(){
+        AtomicReference<Uri> auxUri = null;
+        ActivityResultLauncher<Intent> openImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),result ->{
+            if(result.getResultCode()== Activity.RESULT_OK){
+                auxUri.set(result.getData().getData());
+            }
+        });
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        openImageLauncher.launch(intent);
+        return auxUri.get();
     }
 }

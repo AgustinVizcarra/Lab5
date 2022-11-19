@@ -1,18 +1,36 @@
 package com.example.lab5.Entity;
 
 public class Actividad {
-    private String nombre;
-    private String fechaInicio;
-    private String horaInicio;
     private String fechaFin;
     private String horaFin;
+    private String fechaInicio;
+    private String horaInicio;
+    private String titulo;
+    private String descripcion;
 
-    public String getNombre() {
-        return nombre;
+    public Actividad(String fechaFin, String horaFin, String fechaInicio, String horaInicio, String titulo, String descripcion) {
+        this.fechaFin = fechaFin;
+        this.horaFin = horaFin;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
     }
 
     public String getFechaInicio() {
@@ -31,19 +49,19 @@ public class Actividad {
         this.horaInicio = horaInicio;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public String getHoraFin() {
-        return horaFin;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setHoraFin(String horaFin) {
-        this.horaFin = horaFin;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

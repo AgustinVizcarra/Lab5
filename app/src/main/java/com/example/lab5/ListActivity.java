@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import com.example.lab5.Entity.Actividad;
 
-import java.util.ArrayList;
-
 public class ListActivity extends AppCompatActivity {
 
     @Override
@@ -18,6 +16,8 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         //Obtener los datos
         //Proceso
+
+        /**
         Actividad actividad[];
         ListActivityAdapter activityAdapter = new ListActivityAdapter();
         activityAdapter.setListaActividad(actividad);
@@ -25,5 +25,6 @@ public class ListActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.List);
         recyclerView.setAdapter(activityAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
+         **/
     }
 }

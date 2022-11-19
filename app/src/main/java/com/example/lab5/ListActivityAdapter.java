@@ -51,6 +51,7 @@ public class ListActivityAdapter extends RecyclerView.Adapter<ListActivityAdapte
     public void onBindViewHolder(ActivityViewHolder holder, int position) {
         Actividad a = listaActividad[position];
         holder.actividad = a;
+        /** El parametro nombre actividad no es reconocido
         TextView nombreActividad = holder.itemView.findViewById(R.id.nombreActividad);
         TextView fechaInicio = holder.itemView.findViewById(R.id.fechaInicio);
         TextView horaInicio = holder.itemView.findViewById(R.id.horaInicio);
@@ -61,6 +62,7 @@ public class ListActivityAdapter extends RecyclerView.Adapter<ListActivityAdapte
         fechaFin.setText(a.getFechaFin());
         horaInicio.setText(a.getHoraInicio());
         horaFin.setText(a.getHoraFin());
+         **/
     }
 
 
