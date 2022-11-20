@@ -25,7 +25,7 @@
         <activity
             android:name=".ActualizaAgendaActivity"
             android:exported="false"
-            android:parentActivityName=".InicioSesion" />
+            android:parentActivityName=".ListActivity" />
         <activity
             android:name=".RegistrarUsuario"
             android:exported="false"

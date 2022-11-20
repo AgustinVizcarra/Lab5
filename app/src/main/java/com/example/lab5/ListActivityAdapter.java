@@ -1,6 +1,7 @@
 package com.example.lab5;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,16 @@ public class ListActivityAdapter extends RecyclerView.Adapter<ListActivityAdapte
                     }
                 });
 
+            }
+        });
+        Button buttonEdit = holder.itemView.findViewById(R.id.btn_editar);
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Modificar con agustin
+                Intent intent = new Intent(getContext(),ActualizaAgendaActivity.class);
+                intent.putExtra("actividad",a);
+                getContext().startActivity(intent);
             }
         });
         titulo.setText(a.getTitulo());
