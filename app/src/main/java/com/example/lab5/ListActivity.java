@@ -22,6 +22,14 @@ public class ListActivity extends AppCompatActivity {
     private List<Actividad> actividad = new ArrayList<Actividad>();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private Context mContext;
+
+    public ListActivity(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public ListActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,7 @@ public class ListActivity extends AppCompatActivity {
                 }
                 ListActivityAdapter activityAdapter = new ListActivityAdapter();
                 activityAdapter.setListaActividad(actividad);
-                activityAdapter.setContext(mContext);
+                activityAdapter.setContext(ListActivity.this);
                 RecyclerView recyclerView = findViewById(R.id.Recycler_list);
                 recyclerView.setAdapter(activityAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
